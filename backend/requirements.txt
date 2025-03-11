@@ -1,0 +1,14 @@
+flask==3.0.3
+spacy==3.7.5
+python-dotenv==1.0.1
+SQLAlchemy==2.0.37
+Flask-Migrate==4.1.0
+flask_socketio==5.5.1
+Flask-SQLAlchemy==3.1.1
+flask_jwt_extended==4.6.0
+eventlet==0.39.1
+Werkzeug==3.0.1
+Flask-RESTful==0.3.10
+pytest==8.3.4
+word2number==1.1
+#python -m spacy download en_core_web_sm

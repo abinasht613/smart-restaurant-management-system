@@ -8,6 +8,7 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <MyCom />
     <HelloWorld/>
+    <h1>Dummy</h1>
   </div>
 </template>
 

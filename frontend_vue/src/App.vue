@@ -1,24 +1,9 @@
 <script setup>
-  import MyCom  from "./components/demo/MyCom.vue";
-  import HelloWorld from '@/components/demo/HelloWorld.vue';
+import Navbar from '@/components/Navbar.vue';
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <div>
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <MyCom />
-    <HelloWorld/>
-    <h1>Dummy</h1>
-  </div>
+  <Navbar />
+  <RouterView />
 </template>
-
-<style>
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
-</style>

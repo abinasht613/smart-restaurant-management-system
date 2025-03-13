@@ -12,6 +12,16 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: 'jsdom', // 👈 Ensure jsdom is used
+    environment: 'jsdom',
+  },
+  server: {
+    // port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
 })

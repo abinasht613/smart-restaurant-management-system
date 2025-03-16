@@ -1,7 +1,7 @@
-from flask import request, jsonify
+from flask import request, jsonify, current_app
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from backend.extensions import db
+from backend.extensions import db, socketio
 from backend.models.Item import Item
 from backend.models.Size import Size
 from backend.models.Modifier import Modifier 
@@ -10,10 +10,25 @@ from backend.models.Order import Order
 from backend.models.OrderDetails import OrderDetails
 from backend.models.OrderDetailModifier import  OrderDetailModifier
 from backend.utils.OrderExtraction import extract_order  # NLP Order Parsing
+# from flask_socketio import emit
 
 class OrderResource(Resource):
     @jwt_required()
     def post(self):
+        socketio = current_app.extensions.get("socketio")  # ✅ Get socketio from extensions
+        if not socketio:
+            return {"error": "SocketIO not initialized"}, 500
+        # socketio.emit("new_order", {
+        #         "order_id":1,
+        #         "customer": "customer_name",
+        #         "mobile": "customer_mobile",
+        #         "total_amount": "total_amount",
+        #         "items": "order_items"
+        #     }, room="chefs")
+
+        # return {"error": f"Error placing order: "}, 500
+
+
         """Place a new order based on extracted NLP data."""
         data = request.json
         order_text = data.get("order_text")
@@ -56,7 +71,7 @@ class OrderResource(Resource):
                 #     type_id =   Null
 
                 item_detail = ItemDetails.query.filter_by(item_id=item.id, size_id=size.id, type_id=type_id).first()
-                print(f"Item Detail: {item.id} - {size.id} - {item_detail}")
+                print(f"Item Detail: {item.id} - {size.id} - {type_id} - {item_detail}")
                 if not item_detail:
                     return {"error": f"Item {item_id} (Size: {size.id}) (Type: {type_id}) not found in Item Details"}, 400
 
@@ -99,6 +114,18 @@ class OrderResource(Resource):
                     db.session.add(order_mod)
 
             db.session.commit() # Commit all changes
+            # print("aa")
+            # print(new_order.id,customer_name,customer_mobile,total_amount,order_items)
+            # print("bb")
+
+            # Emit order to chefs
+            socketio.emit("new_order", {
+                "order_id": new_order.id,
+                "customer": customer_name,
+                "mobile": customer_mobile,
+                "total_amount": total_amount,
+                "items": order_items
+            }, room="chefs")
 
             return {"message": "Order placed successfully", "order_id": new_order.id, "total_amount": total_amount}, 201
         

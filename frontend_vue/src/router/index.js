@@ -3,6 +3,9 @@ import NotFoundView from '@/views/NotFoundView.vue';
 import DummyView from '@/views/demo/DummyView.vue';
 import LoginView from '@/views/user/LoginView.vue';
 import RegistrationView from '@/views/user/RegistrationView.vue';
+import PlaceOrderView from '@/views/order/PlaceOrderView.vue';
+import ChefOrdersView from '@/views/order/ChefOrdersView.vue';
+import ReportView from '@/views/report/ReportView.vue';
 
 
 const router = createRouter({
@@ -23,20 +26,25 @@ const router = createRouter({
       name: 'registration',
       component: RegistrationView,
     },
+    {
+      path: '/place-order',
+      name: 'place-order',
+      component: PlaceOrderView,
+    },
+    {
+      path: '/chef-order',
+      name: 'chef-order',
+      component: ChefOrdersView,
+    },
+    {
+      path: '/report',
+      name: 'report',
+      component: ReportView,
+    },
     // {
     //   path: '/jobs/:id',
     //   name: 'job',
     //   component: JobView,
-    // },
-    // {
-    //   path: '/jobs/add',
-    //   name: 'add-job',
-    //   component: AddJobView,
-    // },
-    // {
-    //   path: '/jobs/edit/:id',
-    //   name: 'edit-job',
-    //   component: EditJobView,
     // },
     {
       path: '/:catchAll(.*)',

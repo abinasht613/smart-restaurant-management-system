@@ -33,7 +33,11 @@
 import axios from 'axios';
 import { reactive } from 'vue';
 import { useToast } from 'vue-toastification';
+import { useAuthStore } from '@/store/AuthStore';
+import { useRouter } from 'vue-router';
 
+const authStore = useAuthStore();
+const router = useRouter();
 const form = reactive({
     uname: '',
     psw: '',
@@ -49,8 +53,21 @@ const handleSubmit = async () => {
     try {
         const response = await axios.post('api/login', formData);
         if (response.status === 200) {
-            console.log("200");
+            // console.log(response.data.access_token);
+            // console.log(response.data.refresh_token);
             toast.success('Login Successfully');
+            // ✅ Store tokens after successful logi
+            authStore.setTokens({
+                access: response.data.access_token,
+                refresh: response.data.refresh_token
+            });
+            console.log(response.data.access_token);
+            console.log(response.data.refresh_token);
+            console.log("Access Token:", authStore.accessToken);
+            // ✅ Redirect to dashboard
+            setTimeout(() => {
+                router.push('/place-order'); // ✅ Force navigation
+            }, 100); // Small delay to ensure state updates
         }
         
     }

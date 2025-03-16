@@ -5,11 +5,12 @@ from backend.models.Size import Size
 from backend.models.Modifier import Modifier
 from backend.models.Type import Type
 from backend.extensions import db
+import inflect
 
 # Load spaCy NLP model
 try:
     nlp = spacy.load("en_core_web_sm")
-    print("spaCy model loaded successfully!")
+    p = inflect.engine()  # Inflect engine for singularization
 except Exception as e:
     print(f"Error loading spaCy model: {e}")
 
@@ -19,7 +20,13 @@ def fetch_menu_data():
     sizes = {s.sname.lower(): {"id": s.id,"sname":s.sname} for s in db.session.query(Size).all()}
     modifiers = {m.mname.lower(): {"id": m.id,"mname":m.mname, "price": m.price} for m in db.session.query(Modifier).all()}
     types = {t.tname.lower(): {"id": t.id,"tname":t.tname} for t in db.session.query(Type).all()}
-    return items, sizes, modifiers, types
+
+    # Plural-to-Singular Dictionary (for exceptions not handled by `inflect`)
+    plural_to_singular = {
+        "fries": "fries"  # No singular change needed
+    }
+
+    return items, sizes, modifiers, types, plural_to_singular
 
 def extract_order(order_text):
     """
@@ -33,10 +40,40 @@ def extract_order(order_text):
             {"item_id": 3, "size_id": None, "type_id": None, "quantity": 2, "modifiers": []}
         ]
     """
-    items, sizes, modifiers, types = fetch_menu_data()
+    items, sizes, modifiers, types, plural_to_singular = fetch_menu_data()
 
     doc = nlp(order_text.lower())  # Process text with spaCy
-    # words = [token.text for token in doc]
+    # print(f"doc: {doc}")
+
+    words = [token.text for token in doc]
+    
+    processed_order = []
+    i = 0
+
+    while i < len(words):
+        word = words[i]
+        next_word = words[i+1] if i < len(words) - 1 else None
+
+        # Convert plural to singular (priority: dictionary → inflect → original)
+        singular_word = plural_to_singular.get(word, p.singular_noun(word) or word)
+        singular_next_word = plural_to_singular.get(next_word, p.singular_noun(next_word) or next_word) if next_word else None
+
+        # Check for multi-word food items
+        if singular_next_word:
+            combined = f"{singular_word} {singular_next_word}"
+            if combined in items:
+                processed_order.append(combined)
+                i += 2  # Skip next word since it's merged
+                continue
+
+        processed_order.append(singular_word)
+        i += 1
+
+    print(f"processed_order: {processed_order}")
+
+    # processed_order = nlp(processed_order.lower())
+
+
     items_found = []
 
     current_quantity = 1  # Default quantity
@@ -45,8 +82,12 @@ def extract_order(order_text):
     #current_modifiers = []
     current_item = None  # To store the latest detected item
 
-    for i, token in enumerate(doc):
-        word = token.text
+    # print(list(enumerate(doc)))
+    # print(list(enumerate(processed_order)))
+
+    for i, token in (enumerate(processed_order)):
+        word = token
+        # print(f"word: {word}")
 
         # Ignore commas and conjunctions
         if word in [",", "and"]:
@@ -95,6 +136,6 @@ def extract_order(order_text):
         if word in modifiers and current_item:
             modifier_data = {"id": modifiers[word]["id"], "price": modifiers[word]["price"]}
             current_item["modifiers"].append(modifier_data)
-
-    # print(items_found)
+    # print(f"order text {order_text}")
+    # print(f"items found: {items_found}")
     return items_found

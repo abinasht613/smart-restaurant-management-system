@@ -7,7 +7,9 @@ from backend.resources.ModifierResource import ModifierListResource, ModifierRes
 from backend.resources.ItemDetailsResource import ItemDetailsResource
 from backend.resources.OrderResource import OrderResource, OrderDetailResource
 from backend.resources.MenuResource import MenuResource
-
+from backend.resources.ReportResource import ReportResource
+# from functools import partial
+from backend.extensions import socketio
 
 def register_routes(app):
     api = Api(app)
@@ -49,5 +51,8 @@ def register_routes(app):
 
     # Menu Route
     api.add_resource(MenuResource, "/menu")
+
+    # Reports Route
+    api.add_resource(ReportResource, "/reports")
 
     return api

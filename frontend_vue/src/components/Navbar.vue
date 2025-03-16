@@ -63,6 +63,45 @@ const isActiveLink = (routePath) => {
                 ]"
                 >Registration
               </RouterLink>
+              <RouterLink
+                to="/place-order"
+                :class="[
+                  isActiveLink('/place-order')
+                    ? 'bg-green-900'
+                    : 'hover:bg-gray-900 hover:text-white',
+                  'text-white',
+                  'px-3',
+                  'py-2',
+                  'rounded-md',
+                ]"
+                >Place Order
+              </RouterLink>
+              <RouterLink
+                to="/chef-order"
+                :class="[
+                  isActiveLink('/chef-order')
+                    ? 'bg-green-900'
+                    : 'hover:bg-gray-900 hover:text-white',
+                  'text-white',
+                  'px-3',
+                  'py-2',
+                  'rounded-md',
+                ]"
+                >Chef Order
+              </RouterLink>
+              <RouterLink
+                to="/report"
+                :class="[
+                  isActiveLink('/report')
+                    ? 'bg-green-900'
+                    : 'hover:bg-gray-900 hover:text-white',
+                  'text-white',
+                  'px-3',
+                  'py-2',
+                  'rounded-md',
+                ]"
+                >Report
+              </RouterLink>
               <!-- <RouterLink
                 to="/jobs/add"
                 :class="[

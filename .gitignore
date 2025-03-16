@@ -23,3 +23,5 @@ backend/app copy 2.py
 backend/orders.db
 
 frontend_vue/src/App copy.vue
+backend/singular.py
+backend/flask_client.py

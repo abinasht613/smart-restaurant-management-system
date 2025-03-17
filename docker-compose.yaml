@@ -1,0 +1,73 @@
+#version: "3.8" #  specify docker-compose version  
+
+services:  
+  backend:
+    build: ./backend
+    container_name: flask_app
+    ports:
+      - "5000:5000"     # expose the port to the host machine
+    depends_on:
+      db:                           # wait for the db service to be ready
+        condition: service_healthy  # wait for the db service to be healthy
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+    networks:
+      - app_network
+    restart: unless-stopped         # containers restart automatically if they fail unless it is stopped
+
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data    # persist data even after the container is stopped
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql  # run the init.sql script to create the database
+    ports:
+      - "5433:5433"     # expose the port to the host machine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"] # check if the db is ready
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app_network         # connect the db to the app network
+    restart: unless-stopped # containers restart automatically if they fail unless it is stopped
+
+  frontend:
+    build: ./frontend_vue
+    container_name: vue_app
+    ports:
+      - "3000:80" # expose the port to the host machine
+    environment:
+      - VUE_APP_API_URL=http://flask_app/api  # Flask backend URL
+    networks:
+      - app_network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_alegra
+    ports:
+      - "81:80"
+    depends_on:
+      - backend
+      - frontend
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro   # use custom nginx configuration
+      - ./backend/static:/usr/share/nginx/html/static # serve static files
+      - ./frontend_vue/dist:/usr/share/nginx/html # Serve Vue from Nginx
+    networks:
+      - app_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  app_network:

@@ -12,4 +12,7 @@ Flask-RESTful==0.3.10
 pytest==8.3.4
 word2number==1.1
 inflect==7.4.0
+flask-cors==5.0.0
+psycopg==3.2.6 
+psycopg2-binary==2.9.10
 #python -m spacy download en_core_web_sm

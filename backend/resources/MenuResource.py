@@ -23,7 +23,7 @@ class MenuResource(Resource):
                     "size_id": detail.size_id,
                     "size": detail.size.sname if detail.size else None,
                     "type_id": detail.type_id,
-                    "type": detail.type.tname if detail.type else "Default",
+                    "type": detail.type.tname if detail.type else None,
                     "price": detail.price,
                     "stock": detail.qty
                 }

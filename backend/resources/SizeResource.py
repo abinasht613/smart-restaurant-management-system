@@ -17,6 +17,10 @@ class SizeListResource(Resource):
         data = request.json
         if "sname" not in data:
             return {"error": "Missing sname"}, 400
+        # Check if the size already exists
+        existing_size = Size.query.filter_by(sname=data["sname"]).first()
+        if existing_size:
+            return {"error": "Size already exists"}, 409  # HTTP 409 Conflict
         size = Size(sname=data["sname"])
         db.session.add(size)
         db.session.commit()

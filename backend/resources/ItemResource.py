@@ -9,10 +9,14 @@ class ItemResourceCR(Resource):
     def post(self):
         """Add a new item"""
         data = request.json
+        # Check if the item already exists (case-insensitive)
+        existing_item = Item.query.filter(db.func.lower(Item.iname) == data["iname"]).first()
+        if existing_item:
+            return {"error": "Item already exists"}, 400  # Return error if exists
         item = Item(iname=data["iname"])
         db.session.add(item)
         db.session.commit()
-        return {"message": "Item added successfully", "item": item.iname}, 201
+        return {"message": "Item added successfully", "item": item.iname,"item_id":item.id}, 201
 
     @jwt_required()
     def get(self):

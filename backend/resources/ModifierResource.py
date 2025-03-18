@@ -20,7 +20,11 @@ class ModifierListResource(Resource):
         modifier = Modifier(mname=data["mname"], price=data["price"])
         db.session.add(modifier)
         db.session.commit()
-        return {"message": "Modifier added successfully", "modifier": modifier.mname}, 201
+        return {"message": "Modifier added successfully", "modifier": {
+                "id": modifier.id,
+                "name": modifier.mname,
+                "price": modifier.price
+            }}, 201
 
 class ModifierResource(Resource):
     @jwt_required()

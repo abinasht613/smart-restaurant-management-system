@@ -6,6 +6,11 @@ import RegistrationView from '@/views/user/RegistrationView.vue';
 import PlaceOrderView from '@/views/order/PlaceOrderView.vue';
 import ChefOrdersView from '@/views/order/ChefOrdersView.vue';
 import ReportView from '@/views/report/ReportView.vue';
+import SizeView from '@/views/item/SizeView.vue';
+import TypeView from '@/views/item/TypeView.vue';
+import ModifierView from '@/views/item/ModifierView.vue';
+import MenuView from '@/views/item/MenuView.vue';
+import OrderListView from '@/views/order/OrderListView.vue';
 
 
 const router = createRouter({
@@ -40,6 +45,31 @@ const router = createRouter({
       path: '/report',
       name: 'report',
       component: ReportView,
+    },
+    {
+      path: '/size',
+      name: 'size',
+      component: SizeView,
+    },
+    {
+      path: '/type',
+      name: 'type',
+      component: TypeView,
+    },
+    {
+      path: '/modifier',
+      name: 'modifier',
+      component: ModifierView,
+    },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: MenuView,
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: OrderListView,
     },
     // {
     //   path: '/jobs/:id',

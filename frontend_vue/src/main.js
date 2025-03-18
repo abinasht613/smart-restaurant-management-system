@@ -4,6 +4,7 @@ import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 import router from './router';
 import { createPinia } from 'pinia';
+import vuetify from './plugins/vuetify';
 
 import { createApp } from 'vue'
 import './style.css'
@@ -15,5 +16,6 @@ const pinia = createPinia();
 app.use(router);
 app.use(Toast);
 app.use(pinia);
+app.use(vuetify);
 
 app.mount('#app');

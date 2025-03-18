@@ -24,7 +24,7 @@ class SizeListResource(Resource):
         size = Size(sname=data["sname"])
         db.session.add(size)
         db.session.commit()
-        return {"message": "Size added successfully", "size": size.sname}, 201
+        return {"message": "Size added successfully", "size": size.sname,"id":size.id}, 201
 
 class SizeResource(Resource):
     @jwt_required()

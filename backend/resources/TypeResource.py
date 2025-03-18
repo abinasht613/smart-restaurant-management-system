@@ -23,7 +23,7 @@ class TypeListResource(Resource):
         type_obj = Type(tname=data["tname"])
         db.session.add(type_obj)
         db.session.commit()
-        return {"message": "Type added successfully", "type": type_obj.tname}, 201
+        return {"message": "Type added successfully", "type": type_obj.tname,"id":type_obj.id}, 201
 
 class TypeResource(Resource):
     @jwt_required()

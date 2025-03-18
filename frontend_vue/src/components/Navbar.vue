@@ -1,124 +1,67 @@
-<script setup>
-import { RouterLink, useRoute } from 'vue-router';
-import logo from '@/assets/vue.svg';
+<template>
+  <v-app-bar color="green-darken-3" density="comfortable">
+    <v-container class="d-flex align-center justify-space-between">
+      <!-- Logo (if needed) -->
+      <!-- <v-img src="logo.png" max-height="40" max-width="40" contain></v-img> -->
 
-const isActiveLink = (routePath) => {
-  const route = useRoute();
-  return route.path === routePath;
+      <!-- Desktop Navigation (Hidden on Mobile) -->
+      <v-row class="d-none d-md-flex">
+        <v-btn
+          v-for="link in links"
+          :key="link.to"
+          :to="link.to"
+          :variant="isActiveLink(link.to) ? 'elevated' : 'text'"
+          :color="isActiveLink(link.to) ? 'white' : 'green-lighten-3'"
+          class="font-bold"
+        >
+          {{ link.label }}
+        </v-btn>
+      </v-row>
+
+      <!-- Mobile Menu Button (Visible on Small Screens) -->
+      <v-app-bar-nav-icon class="d-md-none" @click="drawer = !drawer" />
+    </v-container>
+  </v-app-bar>
+
+  <!-- Mobile Navigation Drawer -->
+  <v-navigation-drawer v-model="drawer" temporary app>
+    <v-list>
+      <v-list-item
+        v-for="link in links"
+        :key="link.to"
+        :to="link.to"
+        @click="drawer = false"
+      >
+        <v-list-item-title>{{ link.label }}</v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
+</template>
+
+<script setup>
+import { ref } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const drawer = ref(false); // Controls the mobile menu drawer
+
+// Navigation links
+const links = ref([
+  { to: "/", label: "Dummy" },
+  { to: "/login", label: "Login" },
+  { to: "/registration", label: "Registration" },
+  { to: "/place-order", label: "Place Order" },
+  { to: "/chef-order", label: "Chef Order" },
+  { to: "/report", label: "Report" },
+  { to: "/size", label: "Size" },
+  { to: "/type", label: "Type" },
+  { to: "/modifier", label: "Modifier" },
+  { to: "/menu", label: "Menu" },
+  { to: "/order", label: "Order"}
+]);
+
+// Function to check if link is active
+const isActiveLink = (path) => {
+  return route.path === path;
 };
 </script>
-
-<template>
-  <nav class="bg-green-700 border-b border-green-500">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-      <div class="flex h-20 items-center justify-between">
-        <div
-          class="flex flex-1 items-center justify-center md:items-stretch md:justify-start"
-        >
-          <!-- Logo -->
-          <!-- <RouterLink class="flex flex-shrink-0 items-center mr-4" to="/">
-            <img class="h-10 w-auto" :src="logo" alt="Vue Jobs" />
-            <span class="hidden md:block text-white text-2xl font-bold ml-2"
-              >Vue Jobs</span
-            >
-          </RouterLink> -->
-          <div class="md:ml-auto">
-            <div class="flex space-x-2">
-              <RouterLink
-                to="/"
-                :class="[
-                  isActiveLink('/')
-                    ? 'bg-green-900'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                ]"
-                >Dummy
-              </RouterLink>
-              <RouterLink
-                to="/login"
-                :class="[
-                  isActiveLink('/login')
-                    ? 'bg-green-900'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                ]"
-                >Login</RouterLink
-              >
-              <RouterLink
-                to="/registration"
-                :class="[
-                  isActiveLink('/registration')
-                    ? 'bg-green-900'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                ]"
-                >Registration
-              </RouterLink>
-              <RouterLink
-                to="/place-order"
-                :class="[
-                  isActiveLink('/place-order')
-                    ? 'bg-green-900'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                ]"
-                >Place Order
-              </RouterLink>
-              <RouterLink
-                to="/chef-order"
-                :class="[
-                  isActiveLink('/chef-order')
-                    ? 'bg-green-900'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                ]"
-                >Chef Order
-              </RouterLink>
-              <RouterLink
-                to="/report"
-                :class="[
-                  isActiveLink('/report')
-                    ? 'bg-green-900'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                ]"
-                >Report
-              </RouterLink>
-              <!-- <RouterLink
-                to="/jobs/add"
-                :class="[
-                  isActiveLink('/jobs/add')
-                    ? 'bg-green-900'
-                    : 'hover:bg-gray-900 hover:text-white',
-                  'text-white',
-                  'px-3',
-                  'py-2',
-                  'rounded-md',
-                ]"
-                >Add Job</RouterLink
-              > -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-</template>

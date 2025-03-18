@@ -30,6 +30,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
   // Refresh the access token
   async function refreshAccessToken() {
+    if (!refreshToken.value) return null;
     try {
       const response = await api.post('/refresh', {
         refresh_token: refreshToken.value,

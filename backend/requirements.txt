@@ -15,4 +15,5 @@ inflect==7.4.0
 flask-cors==5.0.0
 psycopg==3.2.6 
 psycopg2-binary==2.9.10
+gunicorn==23.0.0
 #python -m spacy download en_core_web_sm

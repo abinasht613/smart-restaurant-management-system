@@ -48,7 +48,7 @@ def create_app(config_name="production"):
     load_config(app, config_name)
     initialize_extensions(app)
     register_routes(app)
-    register_socket_events(socketio)
+    # register_socket_events(socketio)
     
     CORS(app, resources={r"/*": {"origins": "http://localhost:5000"}})
     

@@ -76,7 +76,7 @@ const drawer = ref(false); // Controls the mobile menu drawer
 
 // Navigation links
 const links = ref([
-  // { to: "/", label: "Dummy", guestOnly: true },
+  { to: "/", label: "Dummy", guestOnly: true },
   { to: "/login", label: "Login", guestOnly: true },
   { to: "/registration", label: "Registration", guestOnly: true },
   { to: "/place-order", label: "Place Order", requiresAuth: true },

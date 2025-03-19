@@ -1,7 +1,8 @@
 from flask import request, jsonify, current_app
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from backend.extensions import db, socketio
+from backend.extensions import db
+from backend.extensions import socketio
 from backend.models.Item import Item
 from backend.models.Size import Size
 from backend.models.Modifier import Modifier 
@@ -15,19 +16,9 @@ from backend.utils.OrderExtraction import extract_order  # NLP Order Parsing
 class OrderResource(Resource):
     @jwt_required()
     def post(self):
-        socketio = current_app.extensions.get("socketio")  # ✅ Get socketio from extensions
-        if not socketio:
-            return {"error": "SocketIO not initialized"}, 500
-        # socketio.emit("new_order", {
-        #         "order_id":1,
-        #         "customer": "customer_name",
-        #         "mobile": "customer_mobile",
-        #         "total_amount": "total_amount",
-        #         "items": "order_items"
-        #     }, room="chefs")
-
-        # return {"error": f"Error placing order: "}, 500
-
+        # socketio = current_app.extensions.get("socketio")  # ✅ Get socketio from extensions
+        # if not socketio:
+        #     return {"error": "SocketIO not initialized"}, 500
 
         """Place a new order based on extracted NLP data."""
         data = request.json
@@ -119,13 +110,47 @@ class OrderResource(Resource):
             # print("bb")
 
             # Emit order to chefs
-            socketio.emit("new_order", {
-                "order_id": new_order.id,
-                "customer": customer_name,
-                "mobile": customer_mobile,
-                "total_amount": total_amount,
-                "items": order_items
-            }, room="chefs")
+
+            order = Order.query.filter_by(id=new_order.id).first()
+            order_data = {
+                "id": order.id,
+                "customer": order.cus_name,
+                "mobile": order.cus_mobile,
+                "total_amount": order.tot_amt,
+                "order_time": order.order_time.strftime("%Y-%m-%d %H:%M:%S"),
+                "items": []
+            }
+
+            # Fetch order details using relationships
+            for detail in order.order_details:
+                item_data = {
+                    #"item_detail_id": detail.item_detail_id,
+                    "item_detail": {
+                            "item_id": detail.item_detail.item.id,
+                            "item": detail.item_detail.item.iname,
+                            "size_id": detail.item_detail.size.id,
+                            "size": detail.item_detail.size.sname,
+                            "type_id": detail.item_detail.type.id if detail.item_detail.type else None,
+                            "type": detail.item_detail.type.tname if detail.item_detail.type else None
+                    },
+                    "quantity": detail.qty,
+                    "price": detail.price,
+                    "subtotal": detail.sub_tot,
+                    "modifiers": [
+                        {
+                            "modifier_id": mod.modifier.id,
+                            "name": mod.modifier.mname,
+                            "price": mod.modifier.price
+                        }
+                        for mod in detail.modifiers
+                    ]
+                }
+
+                order_data["items"].append(item_data)
+
+            
+
+            socketio.emit("new_order", order_data)
 
             return {"message": "Order placed successfully", "order_id": new_order.id, "total_amount": total_amount}, 201
         

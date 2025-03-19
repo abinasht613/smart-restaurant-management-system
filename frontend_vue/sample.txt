@@ -1,0 +1,11 @@
+Raw: 
+Two large chicken pepperoni pizza extra cheese, one caesar salad, and two diet coke with Origano
+
+processed_order: 
+['two', 'large', 'chicken', 'pepperoni pizza', 'extra', 'cheese', ',', 'one', 'caesar', 'salad', ',', 'and', 'two', 'diet coke', 'with', 'origano']
+
+
+
+
+Extracted Order: [{'item_id': 25, 'type_id': 5, 'size_id': 5, 'quantity': 2, 'modifiers': [{'id': 3, 'price': 20.0}]}, 
+{'item_id': 3, 'type_id': None, 'size_id': None, 'quantity': 1, 'modifiers': []}, {'item_id': 4, 'type_id': None, 'size_id': None, 'quantity': 2, 'modifiers': [{'id': 2, 'price': 2.0}]}]

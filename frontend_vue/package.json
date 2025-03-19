@@ -19,6 +19,7 @@
     "vuetify": "^3.7.17"
   },
   "devDependencies": {
+    "@pinia/testing": "^1.0.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/test-utils": "^2.4.6",
     "jsdom": "^26.0.0",

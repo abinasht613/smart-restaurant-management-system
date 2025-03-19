@@ -13,6 +13,18 @@
         show-expand
       >
       
+        <!-- ✅ Custom Expand Button for Each Row -->
+        <!-- ✅ Custom Expand Button for Each Row -->
+        <template v-slot:[`item.expand`]="{ isExpanded, expand }">
+          <v-btn
+            icon
+            :color="isExpanded ? 'red' : 'blue'"
+            @click="expand(!isExpanded)"
+          >
+            <v-icon>{{ isExpanded ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+          </v-btn>
+        </template>
+
         <template v-slot:item.order_time="{ item }">
           {{ formatDate(item.order_time) }}
         </template>

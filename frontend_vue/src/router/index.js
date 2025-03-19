@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from '@/store/AuthStore';
 import NotFoundView from '@/views/NotFoundView.vue';
 import DummyView from '@/views/demo/DummyView.vue';
 import LoginView from '@/views/user/LoginView.vue';
@@ -16,11 +17,11 @@ import OrderListView from '@/views/order/OrderListView.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-        path: '/',
-        name: 'dummy',
-        component: DummyView,
-      },
+    // {
+    //     path: '/',
+    //     name: 'dummy',
+    //     component: DummyView,
+    //   },
     {
       path: '/login',
       name: 'login',
@@ -35,41 +36,49 @@ const router = createRouter({
       path: '/place-order',
       name: 'place-order',
       component: PlaceOrderView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/chef-order',
       name: 'chef-order',
       component: ChefOrdersView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/report',
       name: 'report',
       component: ReportView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/size',
       name: 'size',
       component: SizeView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/type',
       name: 'type',
       component: TypeView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/modifier',
       name: 'modifier',
       component: ModifierView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/menu',
       name: 'menu',
       component: MenuView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/order',
       name: 'order',
       component: OrderListView,
+      meta: { requiresAuth: true }
     },
     // {
     //   path: '/jobs/:id',
@@ -82,6 +91,17 @@ const router = createRouter({
       component: NotFoundView,
     },
   ],
+});
+
+// 🔥 Add Navigation Guard
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next('/login'); // 🚀 Redirect to login if not authenticated
+  } else {
+    next();
+  }
 });
 
 export default router;

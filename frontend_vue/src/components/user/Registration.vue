@@ -1,44 +1,58 @@
 <template>
-    <div>
-        <h2>Login Form</h2>
-        <form @submit.prevent="handleSubmit">
-        <div class="imgcontainer">
-            <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
-        </div>
+  <v-container class="d-flex justify-center align-center" style="height: 100vh;">
+    <v-card class="pa-5" width="400">
+      <v-card-title class="text-center text-h5">Register</v-card-title>
 
-        <div class="container">
-            <label for="fname"><b>First Name</b></label>
-            <input type="text" placeholder="Enter First Name" name="fname" v-model="form.fname" required>
+      <v-form @submit.prevent="handleSubmit">
+        <v-text-field 
+          v-model="form.fname"
+          label="First Name"
+          outlined
+          required
+        ></v-text-field>
 
-            <label for="lname"><b>Last Name</b></label>
-            <input type="text" placeholder="Enter Last Name" name="lname" v-model="form.lname" required>
+        <v-text-field 
+          v-model="form.lname"
+          label="Last Name"
+          outlined
+          required
+        ></v-text-field>
 
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" v-model="form.uname" required>
+        <v-text-field 
+          v-model="form.uname"
+          label="Username"
+          outlined
+          required
+        ></v-text-field>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" v-model="form.psw" required>
+        <v-text-field 
+          v-model="form.psw"
+          label="Password"
+          type="password"
+          outlined
+          required
+        ></v-text-field>
 
-            <label for="userrole"><b>Role</b></label>
-            <select name="role" id="userrole" v-model="form.role" required>
-              <option value="chef">Chef</option>
-              <option value="cashier">Cashier</option>
-              <option value="manager">Manager</option>
-              <option value="waiter">Waiter</option>
-            </select>
-                
-            <button type="submit">Register</button>
-        </div>
-        </form>
+        <v-select
+          v-model="form.role"
+          label="Select Role"
+          :items="['Chef', 'Cashier', 'Manager', 'Waiter']"
+          outlined
+          required
+        ></v-select>
 
-        
+        <v-btn type="submit" color="primary" block class="mt-3">Register</v-btn>
 
-    </div>
+        <v-btn color="error" block class="mt-2" @click="clearForm">Cancel</v-btn>
+      </v-form>
+    </v-card>
+  </v-container>
 </template>
 <script setup>
 
 import {reactive} from 'vue';
 import axios from 'axios';
+import { useToast } from 'vue-toastification';
 
 const form = reactive({
     fname: '',
@@ -48,6 +62,8 @@ const form = reactive({
     role: 'manager',
 });
 
+const toast = useToast();
+
 const handleSubmit = async() => {
   const newForm = {
     fname: form.fname,
@@ -56,9 +72,13 @@ const handleSubmit = async() => {
     password: form.psw,
     role: form.role,
   }
-  console.log(newForm);
+  // console.log(newForm);
 
   try {
+    if(!form.fname || !form.lname || !form.uname || !form.psw) {
+      toast.error('Please fill all fields');
+      return;
+    }
     const response = await axios.post('api/register', newForm);
     if (response.status === 201) {
       console.log("201");

@@ -1,33 +1,36 @@
 <template>
-    <div>
-        <h2>Login Form</h2>
-        <form @submit.prevent="handleSubmit">
-        <div class="imgcontainer">
-            <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
-        </div>
+  <v-container class="d-flex justify-center align-center" style="height: 100vh;">
+    <v-card class="pa-5" width="400">
+      <v-card-title class="text-center text-h5">Login</v-card-title>
 
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" v-model="form.uname" name="uname" required>
+      <v-form @submit.prevent="handleSubmit">
+        <v-text-field 
+          v-model="form.uname"
+          label="Username"
+          outlined
+          required
+        ></v-text-field>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" v-model="form.psw" name="psw" required>
-                
-            <button type="submit">Login</button>
-            <label>
-            <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
+        <v-text-field 
+          v-model="form.psw"
+          label="Password"
+          type="password"
+          outlined
+          required
+        ></v-text-field>
 
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-        </form>
+        <v-checkbox v-model="rememberMe" label="Remember me"></v-checkbox>
 
-        
+        <v-btn type="submit" color="primary" block class="mt-3">Login</v-btn>
 
-    </div>
+        <v-btn color="error" block class="mt-2" @click="clearForm">Cancel</v-btn>
+
+        <v-card-text class="text-center mt-3">
+          <a href="#">Forgot password?</a>
+        </v-card-text>
+      </v-form>
+    </v-card>
+  </v-container>
 </template>
 <script setup>
 import axios from 'axios';
@@ -51,6 +54,10 @@ const handleSubmit = async () => {
         password: form.psw,
     };
     try {
+        if (!form.uname || !form.psw) {
+            toast.error('Please fill all fields');
+            return;
+        }
         const response = await axios.post('api/login', formData);
         if (response.status === 200) {
             // console.log(response.data.access_token);
@@ -59,11 +66,14 @@ const handleSubmit = async () => {
             // ✅ Store tokens after successful logi
             authStore.setTokens({
                 access: response.data.access_token,
-                refresh: response.data.refresh_token
+                refresh: response.data.refresh_token,
+                user: response.data.user,
             });
-            console.log(response.data.access_token);
-            console.log(response.data.refresh_token);
+            // console.log(response.data.access_token);
+            // console.log(response.data.refresh_token);
             console.log("Access Token:", authStore.accessToken);
+            console.log("auth-user",authStore.user);
+
             // ✅ Redirect to dashboard
             setTimeout(() => {
                 router.push('/place-order'); // ✅ Force navigation

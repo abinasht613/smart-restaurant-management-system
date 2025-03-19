@@ -7,7 +7,7 @@
       <!-- Desktop Navigation (Hidden on Mobile) -->
       <v-row class="d-none d-md-flex">
         <v-btn
-          v-for="link in links"
+          v-for="link in filteredLinks"
           :key="link.to"
           :to="link.to"
           :variant="isActiveLink(link.to) ? 'elevated' : 'text'"
@@ -16,7 +16,32 @@
         >
           {{ link.label }}
         </v-btn>
+        
       </v-row>
+      
+      <!-- Right Section: User Info & Logout -->
+      <v-menu v-if="authStore.isAuthenticated" offset-y>
+        <template v-slot:activator="{ props }">
+          <v-btn
+            v-bind="props"
+            color="white"
+            variant="text"
+            class="text-truncate"
+            style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+          >
+            <v-icon class="mr-2">mdi-account</v-icon>
+            Welcome {{ authStore.user?.fname }} ({{ authStore.user?.role }})
+          </v-btn>
+        </template>
+
+        <v-list style="min-width: 120px;"> 
+          <v-list-item @click="logoutUser">
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+
 
       <!-- Mobile Menu Button (Visible on Small Screens) -->
       <v-app-bar-nav-icon class="d-md-none" @click="drawer = !drawer" />
@@ -34,34 +59,49 @@
       >
         <v-list-item-title>{{ link.label }}</v-list-item-title>
       </v-list-item>
+      
     </v-list>
   </v-navigation-drawer>
+  <!-- <button v-if="authStore.isAuthenticated" @click="logoutUser">Logout</button> -->
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useAuthStore } from '@/store/AuthStore';
 import { useRoute } from "vue-router";
 
+const authStore = useAuthStore();
 const route = useRoute();
 const drawer = ref(false); // Controls the mobile menu drawer
 
 // Navigation links
 const links = ref([
-  { to: "/", label: "Dummy" },
-  { to: "/login", label: "Login" },
-  { to: "/registration", label: "Registration" },
-  { to: "/place-order", label: "Place Order" },
-  { to: "/chef-order", label: "Chef Order" },
-  { to: "/report", label: "Report" },
-  { to: "/size", label: "Size" },
-  { to: "/type", label: "Type" },
-  { to: "/modifier", label: "Modifier" },
-  { to: "/menu", label: "Menu" },
-  { to: "/order", label: "Order"}
+  // { to: "/", label: "Dummy", guestOnly: true },
+  { to: "/login", label: "Login", guestOnly: true },
+  { to: "/registration", label: "Registration", guestOnly: true },
+  { to: "/place-order", label: "Place Order", requiresAuth: true },
+  { to: "/chef-order", label: "Chef Order", requiresAuth: true },
+  { to: "/report", label: "Report", requiresAuth: true },
+  { to: "/size", label: "Size", requiresAuth: true },
+  { to: "/type", label: "Type", requiresAuth: true },
+  { to: "/modifier", label: "Modifier", requiresAuth: true },
+  { to: "/menu", label: "Menu", requiresAuth: true },
+  { to: "/order", label: "Order", requiresAuth: true },
 ]);
+
+// Filter links based on authentication
+const filteredLinks = computed(() => {
+  return links.value.filter(link =>
+    authStore.isAuthenticated ? link.requiresAuth : link.guestOnly
+  );
+});
 
 // Function to check if link is active
 const isActiveLink = (path) => {
   return route.path === path;
+};
+
+const logoutUser = () => {
+  authStore.logout();
 };
 </script>

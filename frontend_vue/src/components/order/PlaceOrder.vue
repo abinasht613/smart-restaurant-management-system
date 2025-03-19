@@ -3,13 +3,9 @@
         <h2>Order</h2>
         <form @submit.prevent="handleSubmit">
             
-            Input Order: <input type="text" v-model="newOrder.order_text" name="order_text" required>
+            Input Order: <input type="text" v-model="newOrder.order_text" name="order_text" class="order-input" required>
             <div v-if="orderStore.error">{{ orderStore.error }}</div>
             <button v-if="authStore.isAuthenticated" @click="placeNewOrder">Place Order</button>
-            <button v-if="authStore.isAuthenticated" @click="logoutUser">Logout</button>
-            <button v-else>Not Logged In</button>
-
-            
 
             <div v-if="orderStore.loading">Loading...</div>
                 
@@ -36,6 +32,8 @@ onMounted(() => {
     // console.log(authStore.user)
     // console.log("Stored Token:", JSON.stringify(authStore.accessToken, null, 2));
     // orderStore.fetchOrders();
+    console.log("Access Token:", authStore.accessToken);
+    console.log("auth-user",authStore.user);
   }
 });
 
@@ -47,7 +45,15 @@ const placeNewOrder = () => {
   orderStore.placeOrder(newOrder);
 };
 
-const logoutUser = () => {
-  authStore.logout();
-};
+
 </script>
+
+<style>
+.order-input {
+  width: 100%;
+  height: 100px; /* Adjust as needed */
+  padding: 10px;
+  font-size: 16px;
+}
+
+</style>

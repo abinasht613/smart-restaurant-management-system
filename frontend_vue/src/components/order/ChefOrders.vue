@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <h2>Live Order Updates</h2>
     <div v-if="orders.length === 0">No orders yet...</div>
@@ -8,7 +8,43 @@
       </li>
     </ul>
   </div>
+</template> -->
+
+
+<template>
+  <v-container>
+    <h2 class="text-h5 mb-4">Live Order Updates</h2>
+
+    <v-alert v-if="orders.length === 0" type="info">
+      No orders yet...
+    </v-alert>
+
+    <v-row>
+      <v-col v-for="(order, index) in orders" :key="index" cols="12" md="6">
+        <v-card elevation="2">
+          <v-card-title>Order #{{ index + 1 }}</v-card-title>
+          <v-card-subtitle>Customer: {{ order.customer }}</v-card-subtitle>
+          
+          <v-list dense>
+            <v-list-item v-for="(item, i) in order.items" :key="i">
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ item.quantity }} × {{ item.item_detail.size }} {{ item.item_detail.type }} {{ item.item_detail.item }}
+                  <span v-for="modifier in item.modifiers">{{ modifier.name }}</span>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+
+          <v-card-text>
+            <strong>Total:</strong> ${{ order.total_amount }}
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/store/AuthStore';

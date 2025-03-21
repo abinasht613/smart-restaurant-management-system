@@ -1,6 +1,6 @@
 from flask_restful import Api
 from backend.resources.UserResource import RegisterAPI, LoginAPI, RefreshTokenAPI, ProtectedResource, NotProtectedResource
-from backend.resources.ItemResource import ItemResourceCR,ItemResourceUD
+from backend.resources.ItemResource import ItemResourceCR,ItemResourceUD, ItemAndItemDetails
 from backend.resources.SizeResource import SizeListResource, SizeResource
 from backend.resources.TypeResource import TypeListResource, TypeResource
 from backend.resources.ModifierResource import ModifierListResource, ModifierResource
@@ -54,5 +54,9 @@ def register_routes(app):
 
     # Reports Route
     api.add_resource(ReportResource, "/reports")
+
+
+    # Item and ItemDetails Route
+    api.add_resource(ItemAndItemDetails, "/item-and-item-details")
 
     return api

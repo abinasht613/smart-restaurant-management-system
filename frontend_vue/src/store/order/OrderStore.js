@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import api from '@/api';
+import { useToast } from "vue-toastification";
 
 export const useOrderStore = defineStore('orderStore', () => {
   const orders = ref([]);
   const loading = ref(false);
   const error = ref(null);
-
+  const toast = useToast();
   // Fetch orders from API with authentication
   async function fetchOrders() {
     loading.value = true;
@@ -27,6 +28,7 @@ export const useOrderStore = defineStore('orderStore', () => {
       if(response.status==201){
         // console.log(response);
         orders.value.push(response.data);
+        toast.success("Order added successfully!");
       }
       else {
         console.log(response);

@@ -12,6 +12,8 @@ import TypeView from '@/views/item/TypeView.vue';
 import ModifierView from '@/views/item/ModifierView.vue';
 import MenuView from '@/views/item/MenuView.vue';
 import OrderListView from '@/views/order/OrderListView.vue';
+import ItemView from '@/views/item/ItemView.vue';
+import textOrder from '@/views/textOrder.vue';
 
 
 const router = createRouter({
@@ -78,6 +80,18 @@ const router = createRouter({
       path: '/order',
       name: 'order',
       component: OrderListView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/item',
+      name: 'item',
+      component: ItemView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/text',
+      name: 'text',
+      component: textOrder,
       meta: { requiresAuth: true }
     },
     // {

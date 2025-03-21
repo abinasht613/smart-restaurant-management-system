@@ -3,6 +3,9 @@
         <h2>Order</h2>
         <form @submit.prevent="handleSubmit">
             
+            Customer Name: <input type="text" v-model="newOrder.customer_name" name="customer_name">
+            Customer Phone: <input type="text" v-model="newOrder.customer_mobile" name="customer_mobile" required>
+
             Input Order: <input type="text" v-model="newOrder.order_text" name="order_text" class="order-input" required>
             <div v-if="orderStore.error">{{ orderStore.error }}</div>
             <button v-if="authStore.isAuthenticated" @click="placeNewOrder">Place Order</button>
@@ -20,9 +23,11 @@
 import { onMounted } from 'vue';
 import { useAuthStore } from '@/store/AuthStore';
 import { useOrderStore } from '@/store/order/OrderStore';
+import { useToast } from "vue-toastification";
 
 const authStore = useAuthStore();
 const orderStore = useOrderStore();
+const toast = useToast();
 
 onMounted(() => {
   if (authStore.isAuthenticated) {
@@ -39,6 +44,8 @@ onMounted(() => {
 
 const newOrder = {
     order_text: "Two large chicken pepperoni pizza extra cheese, one caesar salad, and two diet coke with Origano",
+    "customer_mobile":"N/A",
+    "customer_name":"N/A"
 };
 
 const placeNewOrder = () => {

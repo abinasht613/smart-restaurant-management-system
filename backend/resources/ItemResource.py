@@ -5,6 +5,7 @@ from backend.extensions import db
 from backend.models.Item import Item
 from backend.models.Size import Size
 from backend.models.Type import Type
+from backend.models.ItemDetails import ItemDetails
 
 class ItemResourceCR(Resource):
     @jwt_required()

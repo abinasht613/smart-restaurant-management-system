@@ -29,14 +29,19 @@ export const useOrderStore = defineStore('orderStore', () => {
         // console.log(response);
         orders.value.push(response.data);
         toast.success("Order added successfully!");
+        return response.data;
       }
       else {
         console.log(response);
         // error.value = err.response?.data?.error || err.message;  
       }
     } catch (err) {
-      // console.log(err);
-      error.value = err.response?.data?.error || err.message;
+      // console.log(err.response.data);
+      // console.log(err.response.status);
+      // console.log(err.response.data.error);
+      toast.error(err.response.data.error);
+      // error.value = err.response?.data?.error || err.message;
+      return err.response.data
     }
   }
 

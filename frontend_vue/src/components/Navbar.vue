@@ -88,7 +88,7 @@ const links = ref([
   { to: "/menu", label: "Menu", requiresAuth: true },
   { to: "/order", label: "Order", requiresAuth: true },
   { to: "/item", label: "Items", requiresAuth: true },
-  { to: "/text", label: "text", requiresAuth: true },
+  // { to: "/text", label: "text", requiresAuth: true },
 ]);
 
 // Filter links based on authentication

@@ -2,10 +2,12 @@ import spacy
 from word2number import w2n
 from backend.models.Item import Item
 from backend.models.Size import Size
+from backend.models.ItemDetails import ItemDetails
 from backend.models.Modifier import Modifier
 from backend.models.Type import Type
 from backend.extensions import db
 import inflect
+from fuzzywuzzy import process
 
 # Load spaCy NLP model
 try:
@@ -13,6 +15,12 @@ try:
     p = inflect.engine()  # Inflect engine for singularization
 except Exception as e:
     print(f"Error loading spaCy model: {e}")
+
+def fuzzy_match(word, choices, threshold=80):
+    # print(f"word: {word} choices: {choices}")
+    """Find the closest match from choices using fuzzy matching."""
+    match, confidence = process.extractOne(word, choices) if word else (None, 0)
+    return match if confidence > threshold else None
 
 def fetch_menu_data():
     """Fetch menu items, sizes, types, and modifiers from the database."""
@@ -46,21 +54,45 @@ def extract_order(order_text):
     # print(f"doc: {doc}")
 
     words = [token.text for token in doc]
+    print(f"words: {words}")
     
     processed_order = []
+    invalid_words = [];
+    size_missing = []
     i = 0
 
     while i < len(words):
         word = words[i]
         next_word = words[i+1] if i < len(words) - 1 else None
+        # print(f"word: {word} next_word: {next_word}")
 
         # Convert plural to singular (priority: dictionary → inflect → original)
         singular_word = plural_to_singular.get(word, p.singular_noun(word) or word)
         singular_next_word = plural_to_singular.get(next_word, p.singular_noun(next_word) or next_word) if next_word else None
+        # print(f"singular_word:-{singular_word} singular_next_word:-{singular_next_word}")
 
         # Check for multi-word food items
         if singular_next_word:
-            combined = f"{singular_word} {singular_next_word}"
+            if singular_word not in {",", "and"} and singular_next_word not in {",", "and"}:
+                combined = f"{singular_word} {singular_next_word}"
+            elif singular_word not in {",", "and"}:
+                combined = singular_word
+            elif singular_next_word not in {",", "and"}:
+                combined = singular_next_word
+            else:
+                pass
+                combined = ""  # Default case if both are ',' or 'and'
+            print(f"combined: {combined}")
+
+            # Apply fuzzy matching to correct words
+            corrected_word = fuzzy_match(combined, items.keys()) or combined
+            if corrected_word != combined:
+                invalid_words.append({combined:corrected_word})  # Store invalid words for error reporting
+            else:
+                pass
+
+            print(f"corrected_word: {corrected_word}")
+
             if combined in items:
                 processed_order.append(combined)
                 i += 2  # Skip next word since it's merged
@@ -69,7 +101,7 @@ def extract_order(order_text):
         processed_order.append(singular_word)
         i += 1
 
-    print(f"processed_order: {processed_order}")
+    # print(f"processed_order: {processed_order}")
 
     # processed_order = nlp(processed_order.lower())
 
@@ -108,7 +140,9 @@ def extract_order(order_text):
         if word in sizes:
             current_size = sizes[word]["id"]
             continue
-
+        
+        
+            
         # Detect type (must come before an item)
         if word in types:
             current_type = types[word]["id"]
@@ -123,6 +157,11 @@ def extract_order(order_text):
                 "quantity": current_quantity,
                 "modifiers": []
             }
+            if current_size is None:
+                results = ItemDetails.query.filter(ItemDetails.item_id == items[word]["id"]).all()    
+                item_sizes  =[item.size.sname for item in results]
+
+                size_missing.append({word:item_sizes})
             items_found.append(current_item)
 
             # Reset tracking variables for the next item
@@ -138,4 +177,9 @@ def extract_order(order_text):
             current_item["modifiers"].append(modifier_data)
     # print(f"order text {order_text}")
     # print(f"items found: {items_found}")
-    return items_found
+    print(f"invalid words: {invalid_words}")
+    print(f"size missing: {size_missing}")
+
+    
+    
+    return items_found, invalid_words, size_missing

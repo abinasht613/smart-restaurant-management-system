@@ -30,10 +30,16 @@ class OrderResource(Resource):
             return {"error": "Order text is required"}, 400
 
         # Step 1: Extract items, sizes, and modifiers using NLP
-        extracted_order = extract_order(order_text)
+        extracted_order, invalid_words, size_missing = extract_order(order_text)
         print(f"Extracted Order: {extracted_order}")
         if not extracted_order:
             return {"error": "Could not process order"}, 400
+        
+
+
+        if len(invalid_words) > 0 or len(size_missing) > 0:
+            return {"invalid_words":invalid_words, "size_missing":size_missing,"error": "Missing Size or Invalid Items"}, 400
+
 
         total_amount = 0
         order_items = []

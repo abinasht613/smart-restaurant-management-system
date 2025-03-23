@@ -51,7 +51,8 @@ services:
     restart: unless-stopped
 
   nginx:
-    image: nginx:latest
+    # image: nginx:latest
+    build: ./frontend_vue  # Build Vue inside Nginx
     container_name: nginx_alegra
     ports:
       - "81:80"
@@ -61,7 +62,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro   # use custom nginx configuration
       - ./backend/static:/usr/share/nginx/html/static # serve static files
-      - ./frontend_vue/dist:/usr/share/nginx/html # Serve Vue from Nginx
+      # - ./frontend_vue/dist:/usr/share/nginx/html # Serve Vue from Nginx
     networks:
       - app_network
     restart: unless-stopped

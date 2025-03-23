@@ -8,3 +8,10 @@ python -m backend.app
 *   docker-compose exec backend flask db migrate -m "Initial migration"   
 *   docker-compose exec backend flask db upgrade
 *   docker-compose down -v
+
+*   If issue
+    docker-compose build --no-cache
+    docker-compose up -d
+
+*   http://localhost:81     ->  front_end
+*   http://localhost:81/api ->  backend

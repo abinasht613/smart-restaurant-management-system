@@ -85,18 +85,22 @@ def extract_order(order_text):
             print(f"combined: {combined}")
 
             # Apply fuzzy matching to correct words
-            corrected_word = fuzzy_match(combined, items.keys()) or combined
-            if corrected_word != combined:
-                invalid_words.append({combined:corrected_word})  # Store invalid words for error reporting
-            else:
+            if (singular_word in sizes.keys()):
+                print(f"size found in singular_word: {singular_word}")
                 pass
+            else:
+                corrected_word = fuzzy_match(combined, items.keys()) or combined
+                if corrected_word != combined:
+                    invalid_words.append({combined:corrected_word})  # Store invalid words for error reporting
+                else:
+                    pass
 
-            print(f"corrected_word: {corrected_word}")
+                print(f"corrected_word: {corrected_word}")
 
-            if combined in items:
-                processed_order.append(combined)
-                i += 2  # Skip next word since it's merged
-                continue
+                if combined in items:
+                    processed_order.append(combined)
+                    i += 2  # Skip next word since it's merged
+                    continue
 
         processed_order.append(singular_word)
         i += 1

@@ -9,7 +9,9 @@ import vuetify from './plugins/vuetify';
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import axios from 'axios';
 
+axios.defaults.baseURL = import.meta.env.VUE_APP_API_URL || 'http://localhost:5000';
 const app = createApp(App);
 const pinia = createPinia();
 

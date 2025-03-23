@@ -15,13 +15,13 @@ RUN python -m spacy download en_core_web_sm
 # Copy the current directory contents into the container at /backend
 COPY . .
 
+# Set Python path inside the container
+ENV PYTHONPATH="/backend"
+
 # Expose the Flask port
 EXPOSE 5000            
 
 # Run Flask app
-
-RUN python -m spacy download en_core_web_sm
-
-# CMD ["python", "app.py"]
+CMD ["python", "-m","app"]
 # CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
-CMD ["gunicorn", "-k", "eventlet", "-w", "1", "-b", "0.0.0.0:5000", "backend.app:app"]
+# CMD ["gunicorn", "-k", "eventlet", "-w", "1", "-b", "0.0.0.0:5000", "app:app"]

@@ -79,7 +79,7 @@ const handleSubmit = async() => {
       toast.error('Please fill all fields');
       return;
     }
-    const response = await axios.post('api/register', newForm);
+    const response = await axios.post('/register', newForm);
     if (response.status === 201) {
       console.log("201");
     }

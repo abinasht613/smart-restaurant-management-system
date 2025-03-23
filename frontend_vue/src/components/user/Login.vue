@@ -58,7 +58,7 @@ const handleSubmit = async () => {
             toast.error('Please fill all fields');
             return;
         }
-        const response = await axios.post('api/login', formData);
+        const response = await axios.post('/login', formData);
         if (response.status === 200) {
             // console.log(response.data.access_token);
             // console.log(response.data.refresh_token);

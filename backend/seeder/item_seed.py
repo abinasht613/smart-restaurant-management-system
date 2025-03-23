@@ -3,7 +3,7 @@ import os
 # Ensure backend module is discoverable
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from backend.extensions import db
-from backend import create_app
+from backend.create_app import create_app
 from backend.models.Item import Item
 from backend.models.Size import Size
 from backend.models.Type import Type

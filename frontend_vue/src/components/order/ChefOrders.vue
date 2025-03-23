@@ -53,14 +53,19 @@ import { io } from "socket.io-client";
 const authStore = useAuthStore();
 const orders = ref([]);
 
+const apiBaseUrl = import.meta.env.VUE_APP_API_URL || "http://localhost:5000";
+const wsBaseUrl = apiBaseUrl.replace(/^http/, "ws"); // Convert http to ws
+
+const socket = io(wsBaseUrl, {
+  // transports: ["websocket"],
+  query: {
+    token: authStore.accessToken
+  },
+});
+
 onMounted(() => {
   if (authStore.isAuthenticated) {
-      const socket = io("ws://localhost:5000", {
-        // transports: ["websocket"],
-        query: {
-          token: authStore.accessToken
-        },
-      });
+      
 
       
 

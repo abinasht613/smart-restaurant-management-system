@@ -74,3 +74,5 @@ Live Order Display
 [Watch Video](/screenshots/sample_order.mkv)
 
 https://github.com/abinasht613/smart-restaurant-management-system/raw/refs/heads/main/screenshots/sample_order.mkv
+
+https://github.com/abinasht613/smart-restaurant-management-system/raw/refs/heads/main/screenshots/order_speech.mkv

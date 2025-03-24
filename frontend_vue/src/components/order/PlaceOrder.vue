@@ -6,7 +6,12 @@
             Customer Name: <input type="text" v-model="newOrder.customer_name" name="customer_name">
             Customer Phone: <input type="text" v-model="newOrder.customer_mobile" name="customer_mobile" required>
 
-            Input Order: <input type="text" v-model="newOrder.order_text" name="order_text" class="order-input" required>
+            Input Order: <input type="text" v-model="newOrder.order_text" name="order_text" class="order-input" 
+             autocomplete="off" required>
+            <!-- Speech-to-Text Button -->
+            <v-btn color="primary" @click="startSpeechRecognition">
+              🎤 Speak
+            </v-btn>
             <div v-if="orderStore.error">{{ orderStore.error }}</div>
             <button v-if="authStore.isAuthenticated" @click="placeNewOrder">Place Order</button>
 
@@ -89,7 +94,8 @@ onMounted(() => {
 });
 
 const newOrder = ref({
-    order_text: "Two large chicken pepperoni pizzas extra cheese, one caesar salad, and two diet kok",
+    // order_text: "Two large chicken pepperoni pizzas extra cheese, one caesar salad, and two diet kok",
+    order_text: "",
     "customer_mobile":"N/A",
     "customer_name":"N/A"
 });
@@ -149,6 +155,38 @@ const replaceItemWithSize = (item, size) => {
   // Remove from missing size list
   sizeMissing.value = sizeMissing.value.filter(obj => !obj[item]);
 };
+
+// Speech-to-Text Function
+const startSpeechRecognition = () => {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      
+      if (!SpeechRecognition) {
+        alert('Speech recognition is not supported in your browser. Please use Chrome or Edge.');
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = (event) => {
+        // newOrder.value.order_text += event.results[0][0].transcript;
+        newOrder.value.order_text += (newOrder.value.order_text ? ' ' : '') + event.results[0][0].transcript; // Append to existing value
+      };
+
+      recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        alert(`Speech recognition error: ${event.error}`);
+      };
+
+      recognition.start();
+    };
+
+    const submitOrder = async () => {
+      console.log('Order Submitted:', orderInput.value);
+      alert(`Order Submitted: ${orderInput.value}`);
+    };
 
 </script>
 

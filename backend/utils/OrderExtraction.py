@@ -67,8 +67,14 @@ def extract_order(order_text):
         # print(f"word: {word} next_word: {next_word}")
 
         # Convert plural to singular (priority: dictionary → inflect → original)
-        singular_word = plural_to_singular.get(word, p.singular_noun(word) or word)
-        singular_next_word = plural_to_singular.get(next_word, p.singular_noun(next_word) or next_word) if next_word else None
+        if word and word.strip():  # Ensure word is not empty or just whitespace
+            singular_word = plural_to_singular.get(word, p.singular_noun(word) or word)
+        else:
+            singular_word = word  # Keep the word unchanged if empty
+        if next_word and next_word.strip():
+            singular_next_word = plural_to_singular.get(next_word, p.singular_noun(next_word) or next_word)
+        else:
+            singular_next_word = None
         # print(f"singular_word:-{singular_word} singular_next_word:-{singular_next_word}")
 
         # Check for multi-word food items

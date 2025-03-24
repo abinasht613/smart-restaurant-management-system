@@ -71,4 +71,4 @@ Live Order Display
 
 
 # Order Video
-<video src="/screenshots/sample_order.mkv" width="320" height="240" controls>Order Video</video>
+<video src="/screenshots/sample_order.mkv" width="320" height="240" controls></video>

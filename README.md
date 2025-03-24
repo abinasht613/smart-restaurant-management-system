@@ -1,7 +1,7 @@
 # smart-restaurant-management-system
 
-# copy .env.example to .env
-# copy /frontend_vue/.env.example to /frontend_vue/.env
+* copy .env.example to .env
+* copy /frontend_vue/.env.example to /frontend_vue/.env
 
 *   docker-compose up --build -d   
 *   docker-compose exec backend flask db init                                         
@@ -9,9 +9,9 @@
 *   docker-compose exec backend flask db upgrade
 *   docker-compose down -v
 
-*   If issue
-    docker-compose build --no-cache
-    docker-compose up -d
+*   If any issue <br/> 
+    * docker-compose build --no-cache
+    * docker-compose up -d
 
 *   http://localhost:3000     ->  front_end
 *   http://localhost:5000     ->  backend
@@ -37,12 +37,12 @@
 - Toast for Success and Error messages
 - ApexCharts for popular items, peak hours, and sales trends
 
-- **Deployment:
+## **Deployment:
 - Docker Compose to containerize frontend, backend, and database
 - NGINX as a reverse proxy (optional for production)
 
 ## Screenshots
-1. Registration
+1. Registration 
 <img src="/screenshots/1 Registration.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
 2. Login
 <img src="/screenshots/2 Login.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>

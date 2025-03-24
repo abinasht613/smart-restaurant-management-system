@@ -22,8 +22,8 @@
 - PostgreSQL with **SQLAlchemy** (Flask)
 - **SpaCy**for NLP tasks
 - **word2number** for converting text (two) to numerals (2)
-- fuzzywuzzy for suggestions (menu items): (diet kok -> diet coke)
-- inflect : convert plural words to singular : (pizzas -> pizza)
+- **fuzzywuzzy** for suggestions (menu items): (diet kok -> diet coke)
+- **inflect** : convert plural words to singular : (pizzas -> pizza)
 - **Flask-SocketIO** (for Flask) for WebSockets
 - Unit tests : pytest
 
@@ -38,5 +38,28 @@
 - Docker Compose to containerize frontend, backend, and database
 - NGINX as a reverse proxy (optional for production)
 
+## Screenshots
 1. Registration
 <img src="/screenshots/1 Registration.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+2. Login
+<img src="/screenshots/2 Login.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+3. Size
+<img src="/screenshots/3 Size.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+4. Type
+<img src="/screenshots/4 Type.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+5.Modifier
+<img src="/screenshots/5 Modifier.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+6.Add Item
+<img src="/screenshots/6 Add Item.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+7. Menu
+<img src="/screenshots/7 Menu.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+8. Place Order with suggestion 
+<img src="/screenshots/8 order .png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+<img src="/screenshots/order a.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+<img src="/screenshots/order b.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+
+9. All Orders
+<img src="/screenshots/10_all_orders.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+
+10. Report with charts
+<img src="/screenshots/9 report.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>

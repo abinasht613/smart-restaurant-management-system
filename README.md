@@ -17,7 +17,7 @@
 *   http://localhost:5000     ->  backend
 
 ### **Tech Stack:
-- **Backend:
+## **Backend:
 - **Flask** (with Flask-RESTful)
 - PostgreSQL with **SQLAlchemy** (Flask)
 - **SpaCy**for NLP tasks
@@ -27,7 +27,7 @@
 - **Flask-SocketIO** (for Flask) for WebSockets
 - Unit tests : pytest
 
-- **Frontend:
+## **Frontend:
 - Vue.js 3 (Composition API)
 - Vue Router for navigation
 - Pinia for state management
@@ -38,4 +38,5 @@
 - Docker Compose to containerize frontend, backend, and database
 - NGINX as a reverse proxy (optional for production)
 
-<img src="/screenshots/1 Registration.png" alt="MarineGEO circle logo" style="height: 100px; width:100px;"/>
+1. Registration
+<img src="/screenshots/1 Registration.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>

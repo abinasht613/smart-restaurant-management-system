@@ -36,6 +36,8 @@
 - Axios for API calls
 - Toast for Success and Error messages
 - ApexCharts for popular items, peak hours, and sales trends
+**Voice Command Integration:**
+- Added browser-based speech-to-text (Web Speech API).
 
 ## **Deployment:
 - Docker Compose to containerize frontend, backend, and database

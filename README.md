@@ -20,6 +20,7 @@
 ## **Backend:
 - **Flask** (with Flask-RESTful)
 - PostgreSQL with **SQLAlchemy** (Flask)
+- User Authentication: Flask-JWT-Extended
 - **SpaCy**for NLP tasks
 - **word2number** for converting text (two) to numerals (2)
 - **fuzzywuzzy** for suggestions (menu items): (diet kok -> diet coke)
@@ -34,6 +35,7 @@
 - Vuetify for UI components
 - Axios for API calls
 - Toast for Success and Error messages
+- ApexCharts for popular items, peak hours, and sales trends
 
 - **Deployment:
 - Docker Compose to containerize frontend, backend, and database

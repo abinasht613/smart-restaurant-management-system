@@ -82,6 +82,7 @@ const handleSubmit = async() => {
     const response = await axios.post('/register', newForm);
     if (response.status === 201) {
       console.log("201");
+      toast.success('Registration Successfully Please Login');
     }
   }
   catch (error) {

@@ -17,6 +17,13 @@ const pinia = createPinia();
 
 app.use(router);
 app.use(Toast);
+// app.use(Toast, {
+//     position: "top-right", // Change to 'bottom-right', 'top-center', etc.
+//     maxToasts: 3, // Limit the number of toasts displayed at a time
+//     newestOnTop: true, // Ensures new toasts appear above old ones
+//     transition: "Vue-Toastification__fade",
+//     toastClassName: "custom-toast",
+// });
 app.use(pinia);
 app.use(vuetify);
 

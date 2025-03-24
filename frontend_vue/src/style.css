@@ -2,6 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --toast-width: auto;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -136,12 +137,22 @@ span.psw {
      width: 100%;
   }
 }
-/* .toast-message {
-  display: flex;
+
+.Vue-Toastification__toast {
+  display: flex !important;
   align-items: center;
   justify-content: center;
-  text-align: center;
-} */
-.Vue-Toastification__toast-body{
-  word-break: unset;
+  white-space: normal !important;
+  word-break: normal !important;
+  width: auto !important;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+.Vue-Toastification__toast-body {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  text-align: left !important;
+  max-width: 400px;
 }

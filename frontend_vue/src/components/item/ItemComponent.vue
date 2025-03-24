@@ -1,13 +1,14 @@
 <template>
   <v-container>
-  <v-card class="pa-5" max-width="600px">
+  <v-card class="pa-5 fixed-card" min-width="700px">
     <v-card-title class="text-h5">Add New Item</v-card-title>
-    <v-form @submit.prevent="submitItem">
+    <v-form @submit.prevent="submitItem" style="width: 100%">
       <v-text-field
         v-model="item.iname"
         label="Item Name"
         outlined
         required
+        class="fixed-width"
       ></v-text-field>
 
       <v-divider class="my-4"></v-divider>
@@ -24,6 +25,7 @@
             label="Size"
             outlined
             required
+            class="fixed-width"
           ></v-select>
         </v-col>
         <v-col cols="3">
@@ -34,6 +36,7 @@
             item-title="tname"
             label="Type"
             outlined
+            class="fixed-width"
           ></v-select>
         </v-col>
         <v-col cols="2">
@@ -43,6 +46,7 @@
             label="Price"
             outlined
             required
+            class="fixed-width"
           ></v-text-field>
         </v-col>
         <v-col cols="2">
@@ -52,6 +56,7 @@
             label="Stock"
             outlined
             required
+            class="fixed-width"
           ></v-text-field>
         </v-col>
         <v-col cols="2">
@@ -153,7 +158,11 @@ export default {
 </script>
 
 <style scoped>
-.v-container {
+/* .v-container {
   max-width: 600px;
+} */
+.fixed-width {
+  min-width: 100%; /* Adjust as needed */
+  max-width: 100%; /* Keep width consistent */
 }
 </style>

@@ -50,7 +50,7 @@ def create_app(config_name="production"):
     register_routes(app)
     # register_socket_events(socketio)
     
-    CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://localhost:3000",'http://localhost:5000']}})
+    CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://localhost:3000"]}})
     
     @app.errorhandler(404)
     def not_found(e):

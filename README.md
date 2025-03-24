@@ -3,7 +3,7 @@
 * copy .env.example to .env
 * copy /frontend_vue/.env.example to /frontend_vue/.env
 
-*   docker-compose up --build -d   
+*   docker-compose up --build -d  (if postgres fail then run command once again) 
 *   docker-compose exec backend flask db init                                         
 *   docker-compose exec backend flask db migrate -m "Initial migration"   
 *   docker-compose exec backend flask db upgrade

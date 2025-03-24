@@ -33,6 +33,7 @@
 - Pinia for state management
 - Vuetify for UI components
 - Axios for API calls
+- Toast for Success and Error messages
 
 - **Deployment:
 - Docker Compose to containerize frontend, backend, and database
@@ -56,10 +57,12 @@
 8. Place Order with suggestion 
 <img src="/screenshots/8 order .png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
 <img src="/screenshots/order a.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+Live Order Display 
 <img src="/screenshots/order b.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
 
 9. All Orders
 <img src="/screenshots/10_all_orders.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+<img src="/screenshots/10_all_orders_1.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
 
 10. Report with charts
 <img src="/screenshots/9 report.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>

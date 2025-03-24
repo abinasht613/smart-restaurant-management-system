@@ -36,7 +36,7 @@
 - Axios for API calls
 - Toast for Success and Error messages
 - ApexCharts for popular items, peak hours, and sales trends
-**Voice Command Integration:**
+- **Voice Command Integration:**
 - Added browser-based speech-to-text (Web Speech API).
 
 ## **Deployment:
@@ -72,9 +72,10 @@ Live Order Display
 <img src="/screenshots/9 report.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
 
 
-# Order Video
+# Order Videos
 [Watch Video](/screenshots/sample_order.mkv)
-
+- **Text based order**
 https://github.com/abinasht613/smart-restaurant-management-system/raw/refs/heads/main/screenshots/sample_order.mkv
 
+- **Speech to Text**
 https://github.com/abinasht613/smart-restaurant-management-system/raw/refs/heads/main/screenshots/order_speech.mkv

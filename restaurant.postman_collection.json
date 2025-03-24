@@ -1,0 +1,1225 @@
+{
+	"info": {
+		"_postman_id": "b431da58-498c-4342-b8f5-ef3ebc588f0b",
+		"name": "restaurant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1 register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"abinash1\",\n    \"password\":\"abinash1\",\n    \"role\":\"chef\",\n    \"fname\":\"abinash\",\n    \"lname\":\"talukdar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2 login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"abinash\",\n    \"password\":\"abinash\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3 not protected",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/not-protected",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"not-protected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4 protected",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxMzY0MiwianRpIjoiYWE0YTE2N2UtNTY3YS00NDEyLTg5YjgtZDIyYmM5MDE3NDI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTEzNjQyLCJjc3JmIjoiMjdlNzkxMDItM2UyMy00ZmNhLTg4OTEtMjBhZDIzOWZkMzVkIiwiZXhwIjoxNzQxNTE0NTQyfQ.tpzlCttusmXJOk6h6BbsEPWIb6z6zQUWYs3bQye051M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/protected",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"protected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5 refresh",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxMjM2NSwianRpIjoiOGI0YzAzZTMtNDA5My00NzU2LTg4YjAtMTZhMDY1NDc0NjYxIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOjIsIm5iZiI6MTc0MTUxMjM2NSwiY3NyZiI6ImVlNjViNTc1LTRlMzItNDUwNy1hMGM0LTg2Y2JkNTJmMDM2ZiIsImV4cCI6MTc0MTU5ODc2NX0.FO7kzR_-Yb5_ZUoet954C2odP_b7TZA-CPBgNJpCuOA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/refresh",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6 get item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjU1MjY2OCwianRpIjoiMzM4ODg2MDgtY2EwOC00ZjQ1LThlYzgtNGU3NWYyMzIwNTkxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyNTUyNjY4LCJjc3JmIjoiNzEzNWZhNDYtMDRlMC00OTY2LTlmZjYtNDNjZDRlYTQ3MjA2IiwiZXhwIjoxNzQyNjM5MDY4fQ.YCHo3KYLGsfeSyQIz4SQeAhaL_7090rD8Ec9PNTj-ns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/items",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7 save item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjIwMjcxNSwianRpIjoiZGU0YzUyMWQtMTIwNy00MmYyLTk5NjEtNGM1ZjUxZTljNmE5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjAyNzE1LCJjc3JmIjoiZDU4OTJhOWUtODI2Ny00ZWQ2LTg1MDYtYzM4YjFlMWJmYjgxIiwiZXhwIjoxNzQyMjg5MTE1fQ.M9He7pM4oEl0c8V2EhiPp4Y04mm-3LPRAL37XWu2wkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"ddd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/items",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7 a save item & details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjU1MjY2OCwianRpIjoiMzM4ODg2MDgtY2EwOC00ZjQ1LThlYzgtNGU3NWYyMzIwNTkxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyNTUyNjY4LCJjc3JmIjoiNzEzNWZhNDYtMDRlMC00OTY2LTlmZjYtNDNjZDRlYTQ3MjA2IiwiZXhwIjoxNzQyNjM5MDY4fQ.YCHo3KYLGsfeSyQIz4SQeAhaL_7090rD8Ec9PNTj-ns",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"iname\": \"P P Pizza\",\n  \"variants\": [\n    {\n      \"size_id\": 2,\n      \"type_id\": 2,\n      \"price\": 150.0,\n      \"qty\": 10\n    },\n    {\n      \"size_id\": 2,\n      \"type_id\": 4,\n      \"price\": 200.0,\n      \"qty\": 5\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/item-and-item-details",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"item-and-item-details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8 update item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjIwMjcxNSwianRpIjoiZGU0YzUyMWQtMTIwNy00MmYyLTk5NjEtNGM1ZjUxZTljNmE5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjAyNzE1LCJjc3JmIjoiZDU4OTJhOWUtODI2Ny00ZWQ2LTg1MDYtYzM4YjFlMWJmYjgxIiwiZXhwIjoxNzQyMjg5MTE1fQ.M9He7pM4oEl0c8V2EhiPp4Y04mm-3LPRAL37XWu2wkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"pizza\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/items/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"items",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9 delete item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"barger\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/items/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"items",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10 get size",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjI5OTcwNywianRpIjoiMzkwNWFhMjQtZDBlOS00NjQzLTkwY2EtNmU3Mjg1NjVlZDkxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjk5NzA3LCJjc3JmIjoiNGI2Mzg5YjktMTRmMy00MDNkLTg2NjgtYjNmMWZkMTQxM2E0IiwiZXhwIjoxNzQyMzg2MTA3fQ.pSgDGuCPU_l8OM3ttBUZT7REZDqRsi165nwBkcqUHaM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/sizes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sizes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11 save size",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjIxMzM5MSwianRpIjoiZGM0NDEyNGEtOTFiZS00YzcyLTkwYzAtZDVkNzMxMDRhMzJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjEzMzkxLCJjc3JmIjoiMmM0Y2M5NTItOTFhNS00YzAyLWE4YWItODg0MzNjMmYzMmRlIiwiZXhwIjoxNzQyMjk5NzkxfQ.Yk01Q1gt14ExEP0ajGD3036LIfWRcRV11mIpRQChuKU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sname\":\"Large\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/sizes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sizes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12 update size",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sname\":\"Large\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/sizes/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sizes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "13 delete size",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"barger\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/sizes/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sizes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "14 get type",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjI5OTcwNywianRpIjoiMzkwNWFhMjQtZDBlOS00NjQzLTkwY2EtNmU3Mjg1NjVlZDkxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjk5NzA3LCJjc3JmIjoiNGI2Mzg5YjktMTRmMy00MDNkLTg2NjgtYjNmMWZkMTQxM2E0IiwiZXhwIjoxNzQyMzg2MTA3fQ.pSgDGuCPU_l8OM3ttBUZT7REZDqRsi165nwBkcqUHaM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/types",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "15 save type",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tname\":\"Chicken\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/types",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "16 update type",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tname\":\"Non Veg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/types/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"types",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "17 delete type",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"barger\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/types/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"types",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "18 get modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjI5OTcwNywianRpIjoiMzkwNWFhMjQtZDBlOS00NjQzLTkwY2EtNmU3Mjg1NjVlZDkxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjk5NzA3LCJjc3JmIjoiNGI2Mzg5YjktMTRmMy00MDNkLTg2NjgtYjNmMWZkMTQxM2E0IiwiZXhwIjoxNzQyMzg2MTA3fQ.pSgDGuCPU_l8OM3ttBUZT7REZDqRsi165nwBkcqUHaM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/modifiers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"modifiers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "19 save modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjI5OTcwNywianRpIjoiMzkwNWFhMjQtZDBlOS00NjQzLTkwY2EtNmU3Mjg1NjVlZDkxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjk5NzA3LCJjc3JmIjoiNGI2Mzg5YjktMTRmMy00MDNkLTg2NjgtYjNmMWZkMTQxM2E0IiwiZXhwIjoxNzQyMzg2MTA3fQ.pSgDGuCPU_l8OM3ttBUZT7REZDqRsi165nwBkcqUHaM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mname\":\"eee\",\n    \"price\":20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/modifiers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"modifiers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "20 update modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjIwMjcxNSwianRpIjoiZGU0YzUyMWQtMTIwNy00MmYyLTk5NjEtNGM1ZjUxZTljNmE5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjAyNzE1LCJjc3JmIjoiZDU4OTJhOWUtODI2Ny00ZWQ2LTg1MDYtYzM4YjFlMWJmYjgxIiwiZXhwIjoxNzQyMjg5MTE1fQ.M9He7pM4oEl0c8V2EhiPp4Y04mm-3LPRAL37XWu2wkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mname\":\"Extra Cheese\",\n    \"price\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/modifiers/19",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"modifiers",
+						"19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "21 delete modifier",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjIwMjcxNSwianRpIjoiZGU0YzUyMWQtMTIwNy00MmYyLTk5NjEtNGM1ZjUxZTljNmE5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjAyNzE1LCJjc3JmIjoiZDU4OTJhOWUtODI2Ny00ZWQ2LTg1MDYtYzM4YjFlMWJmYjgxIiwiZXhwIjoxNzQyMjg5MTE1fQ.M9He7pM4oEl0c8V2EhiPp4Y04mm-3LPRAL37XWu2wkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"barger\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/modifiers/999",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"modifiers",
+						"999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "21 get item details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/itemdetails",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"itemdetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "22 save item Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxMzY0MiwianRpIjoiYWE0YTE2N2UtNTY3YS00NDEyLTg5YjgtZDIyYmM5MDE3NDI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTEzNjQyLCJjc3JmIjoiMjdlNzkxMDItM2UyMy00ZmNhLTg4OTEtMjBhZDIzOWZkMzVkIiwiZXhwIjoxNzQxNTE0NTQyfQ.tpzlCttusmXJOk6h6BbsEPWIb6z6zQUWYs3bQye051M",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"item_id\":2,\n    \"size_id\":3,\n    \"type_id\":5,\n    \"price\":101,\n    \"qty\":11\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/itemdetails",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"itemdetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "23 update item Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"pizza\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/itemdetails/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"itemdetails",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24 delete item Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MTUxNDY1OSwianRpIjoiMzJiZDVkYzgtZmVlYS00ZWEwLTlhZGMtNWI2MjA1ZjIxMTBmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6Miwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQxNTE0NjU5LCJjc3JmIjoiNjE2ZWU2ZTQtZDdhZi00MzFiLWJlMzMtNDQ3NGFiMzZlNjhiIiwiZXhwIjoxNzQxNjAxMDU5fQ.9gyxzzIK7nD36QBhdMQLPhfjbdjFdh5pK9UIQWbiQhw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"barger\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/itemdetails/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"itemdetails",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "25 save Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjExNDYyMCwianRpIjoiNTM4YWFmODMtYmExNC00YzJiLWE5YjQtOTYyZmMzYTMzOWU4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMTE0NjIwLCJjc3JmIjoiMDY5NTU3ZjEtOWVjNC00Y2I1LTg2ZDQtZjJmNGY1NWMzZGEwIiwiZXhwIjoxNzQyMjAxMDIwfQ.WVWHhFY50P_mxH18i8Ycol8aJEcp1cc19Pw3nFBKPrM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_text\":\"Two large chicken pepperoni pizzas extra cheese, one caesar salad, and two diet cokes with Origano\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/order",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "26 all Order",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjI5OTcwNywianRpIjoiMzkwNWFhMjQtZDBlOS00NjQzLTkwY2EtNmU3Mjg1NjVlZDkxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjk5NzA3LCJjc3JmIjoiNGI2Mzg5YjktMTRmMy00MDNkLTg2NjgtYjNmMWZkMTQxM2E0IiwiZXhwIjoxNzQyMzg2MTA3fQ.pSgDGuCPU_l8OM3ttBUZT7REZDqRsi165nwBkcqUHaM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_text\":\"Two large chicken pepperoni pizza extra cheese, one caesar salad, and two diet coke with Origano\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/order",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "27 single Order details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjM1NjYwMSwianRpIjoiYTU0NDJlOTUtY2RkMC00ZWI3LTkyMWQtYzRhMGVjNDM0MThhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMzU2NjAxLCJjc3JmIjoiNTBmMTM1OWQtMmE3Mi00YTY4LTkxNDQtMTc0YzEzZjU3MGNlIiwiZXhwIjoxNzQyNDQzMDAxfQ.lJzvULG41DH74nPQ6oEB84E5SAdp1digTM3fIo67ErY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_text\":\"Two large chicken pepperoni pizza extra cheese, one caesar salad, and two diet coke with Origano\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/order-details/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"order-details",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "28 get menu",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjI5OTcwNywianRpIjoiMzkwNWFhMjQtZDBlOS00NjQzLTkwY2EtNmU3Mjg1NjVlZDkxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjk5NzA3LCJjc3JmIjoiNGI2Mzg5YjktMTRmMy00MDNkLTg2NjgtYjNmMWZkMTQxM2E0IiwiZXhwIjoxNzQyMzg2MTA3fQ.pSgDGuCPU_l8OM3ttBUZT7REZDqRsi165nwBkcqUHaM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/menu",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"menu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "29 get report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjIxMzM5MSwianRpIjoiZGM0NDEyNGEtOTFiZS00YzcyLTkwYzAtZDVkNzMxMDRhMzJkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjEzMzkxLCJjc3JmIjoiMmM0Y2M5NTItOTFhNS00YzAyLWE4YWItODg0MzNjMmYzMmRlIiwiZXhwIjoxNzQyMjk5NzkxfQ.Yk01Q1gt14ExEP0ajGD3036LIfWRcRV11mIpRQChuKU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/reports",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"reports"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "popular_items",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7 save item Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0MjIwMjcxNSwianRpIjoiZGU0YzUyMWQtMTIwNy00MmYyLTk5NjEtNGM1ZjUxZTljNmE5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MSwicm9sZSI6ImNoZWYifSwibmJmIjoxNzQyMjAyNzE1LCJjc3JmIjoiZDU4OTJhOWUtODI2Ny00ZWQ2LTg1MDYtYzM4YjFlMWJmYjgxIiwiZXhwIjoxNzQyMjg5MTE1fQ.M9He7pM4oEl0c8V2EhiPp4Y04mm-3LPRAL37XWu2wkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iname\":\"ddd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/items",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

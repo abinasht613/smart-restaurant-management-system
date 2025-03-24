@@ -27,6 +27,7 @@
 - **inflect** : convert plural words to singular : (pizzas -> pizza)
 - **Flask-SocketIO** (for Flask) for WebSockets
 - Unit tests : pytest
+- Postman collection Added for API
 
 ## **Frontend:
 - Vue.js 3 (Composition API)
@@ -70,6 +71,9 @@ Live Order Display
 
 10. Report with charts
 <img src="/screenshots/9 report.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+
+11. Postman Collection 
+<img src="/screenshots/postman_collection.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
 
 
 # Order Videos

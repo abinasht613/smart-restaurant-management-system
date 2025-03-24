@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '@/store/AuthStore';
 import NotFoundView from '@/views/NotFoundView.vue';
-import DummyView from '@/views/demo/DummyView.vue';
+// import DummyView from '@/views/demo/DummyView.vue';
 import LoginView from '@/views/user/LoginView.vue';
 import RegistrationView from '@/views/user/RegistrationView.vue';
 import PlaceOrderView from '@/views/order/PlaceOrderView.vue';

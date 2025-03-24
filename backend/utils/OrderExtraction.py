@@ -88,6 +88,9 @@ def extract_order(order_text):
             if (singular_word in sizes.keys()):
                 print(f"size found in singular_word: {singular_word}")
                 pass
+            elif (singular_word in modifiers.keys()):
+                print(f"modifier found in singular_word: {singular_word}")
+                pass
             else:
                 corrected_word = fuzzy_match(combined, items.keys()) or combined
                 if corrected_word != combined:

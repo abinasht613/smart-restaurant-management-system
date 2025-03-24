@@ -19,7 +19,7 @@
         </form>
 
         <!-- Open Menu Button -->
-        <v-btn color="primary" ref="menuButton"> Show Suggestions </v-btn>
+        <!-- <v-btn color="primary" ref="menuButton"> Show Suggestions </v-btn> -->
 
         <!-- Popup Menu -->
         <v-menu v-model="menu" :close-on-content-click="false" activator="parent">

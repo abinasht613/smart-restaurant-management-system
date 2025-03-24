@@ -68,3 +68,7 @@ Live Order Display
 
 10. Report with charts
 <img src="/screenshots/9 report.png" alt="MarineGEO circle logo" style="height: 600px; width:800px;"/>
+
+
+# Order Video
+<video src="/screenshots/sample_order.mkv" width="320" height="240" controls></video>

@@ -23,13 +23,16 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     // If token expired, refresh and retry request
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    if (error.response?.status === 200) {
       const newToken = await authStore.refreshAccessToken();
       if (newToken) {
         api.defaults.headers.common.Authorization = `Bearer ${newToken}`;
         return api(originalRequest);
       }
+    }
+    else if (error.response?.status === 401) {
+      authStore.logout(); // Call logout function
+      return Promise.reject(error); // Stop retrying
     }
     return Promise.reject(error);
   }

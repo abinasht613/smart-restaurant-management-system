@@ -1,18 +1,5 @@
-<!-- <template>
-  <div>
-    <h2>Live Order Updates</h2>
-    <div v-if="orders.length === 0">No orders yet...</div>
-    <ul>
-      <li v-for="(order, index) in orders" :key="index">
-        <strong>Order #{{ index + 1 }}</strong>: {{ order.customer }} - {{ order.total_amount }}
-      </li>
-    </ul>
-  </div>
-</template> -->
-
-
 <template>
-  <v-container>
+  <v-container class="order-container">
     <h2 class="text-h5 mb-4">Live Order Updates</h2>
 
     <v-alert v-if="orders.length === 0" type="info">
@@ -49,9 +36,11 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/store/AuthStore';
 import { io } from "socket.io-client";
+import { useToast } from "vue-toastification";
 
 const authStore = useAuthStore();
 const orders = ref([]);
+const toast = useToast();
 
 const apiBaseUrl = import.meta.env.VUE_APP_API_URL || "http://localhost:5000";
 const wsBaseUrl = apiBaseUrl.replace(/^http/, "ws"); // Convert http to ws
@@ -65,10 +54,6 @@ const socket = io(wsBaseUrl, {
 
 onMounted(() => {
   if (authStore.isAuthenticated) {
-      
-
-      
-
       socket.on("connect", () => {
           console.log("Connected to WebSocket!");
           socket.emit("join", { room: "chefs" });
@@ -76,6 +61,7 @@ onMounted(() => {
 
       socket.on("new_order", (order) => {
           console.log("New order received:", order);
+          toast.success("New order received!");
           // Update UI or trigger a notification
           orders.value.push(order);
       });
@@ -98,3 +84,9 @@ onUnmounted(() => {
 });
 
 </script>
+<style>
+.order-container {
+  min-width: 800px; /* Ensures the container doesn't shrink too much */
+  max-width: 100%; /* Allows it to expand dynamically */
+}
+</style>

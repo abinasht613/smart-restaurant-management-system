@@ -78,4 +78,4 @@ Live Order Display
 https://github.com/abinasht613/smart-restaurant-management-system/raw/refs/heads/main/screenshots/sample_order.mkv
 
 - **Speech to Text**
-https://github.com/abinasht613/smart-restaurant-management-system/raw/refs/heads/main/screenshots/order_speech.mkv
+https://github.com/abinasht613/smart-restaurant-management-system/raw/refs/heads/main/screenshots/order_speech.mp4
